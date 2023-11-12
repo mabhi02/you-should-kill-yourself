@@ -32,7 +32,7 @@
   </head>
   <body data-spy="scroll" data-target=".site-nav-target" data-offset="200">
 
-    <nav class="unslate_co--site-mobile-menu">
+    <nav class="unslate_co--site-mobile-menu" style="margin-bottom:1%">
       <div class="close-wrap d-flex">
         <a href="#" class="d-flex ml-auto js-menu-toggle">
           <span class="close-label">Close</span>
@@ -48,7 +48,7 @@
 
     <div class="unslate_co--site-wrap">
 
-      <div class="unslate_co--site-inner">
+      <div class="unslate_co--site-inner" style="margin-bottom:1%">
 
         <div class="lines-wrap">
           <div class="lines-inner">
@@ -90,17 +90,19 @@
       </nav>
       <!-- END nav -->
 
-<div class="cover-v1 jarallax" id="home-section">
-  <div class="container">
-    <div class="row align-items-center" style="position: relative;">
-      <iframe class="scaled-iframe" src="https://classic.nullschool.net/#current/wind/surface/level/orthographic=-81.12,1.64,318/loc=-122.256,37.870" style="border: 0px #ffffff none; z-index: 0;" name="myiFrame" scrolling="no" frameborder="0" marginheight="0px" marginwidth="0px" height="100%" width="100%" allowfullscreen></iframe>
+    <div class="cover-v1 jarallax" id="home-section">
+      <div class="container">
+        <div class="row align-items-center" style="position: relative;">
 
-      <div class="col-md-7 mx-auto text-center" style="position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); z-index: 1;">
-        <h1 class="heading gsap-reveal-hero" style="color: #fff;">OUR PLANET</h1>
+          <iframe id="locationIframe" class="scaled-iframe" style="border: 0px #ffffff none; z-index: 0;" name="myiFrame" scrolling="no" frameborder="0" marginheight="0px" marginwidth="2px" height="100%" width="100%" allowfullscreen></iframe>
+
+          <div class="col-md-7 mx-auto text-center" style="position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); z-index: 1;">
+            <h1 class="heading gsap-reveal-hero" style="color: #fff;">OUR PLANET</h1>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+
 
 
 
@@ -108,13 +110,47 @@
           <span class="mouse">
             <span class="scroll"></span>
           </span>
-          <span class="mouse-label">Scroll</span>
+          <span class="mouse-label">Explore</span>
         </a>
 
       </div>
       <!-- END .cover-v1 -->
 
 
+      <div class="unslate_co--section" id="resources">
+        <div class="container">
+
+          <div class="section-heading-wrap text-center mb-5">
+            <h2 class="heading-h2 text-center divider"><span class="gsap-reveal">What We Do</span></h2>
+            <span style="color:#D63447" class="gsap-reveal"><img src="images/divider.png" alt="divider" width="76"></span>
+          </div>
+
+      <div class="row gutter-v3">
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="feature-v1" data-aos="fade-up" data-aos-delay="0" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%;">
+            <div class="wrap-icon mb-3">
+            </div>
+            <h3 style="color:#D63447">Prediction</h3>
+            <p>Incorporating powerful tools like machine learning, we predict the damage from various natural disasters</p>
+          </div> 
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="feature-v1" data-aos="fade-up" data-aos-delay="100" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%;">
+            <div class="wrap-icon mb-3">
+            </div>
+            <h3 style="color:#D63447">Prevention</h3>
+            <p>Our personalized projects of natural disasters help prevent human vulnerability and other damages</p>
+          </div> 
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="feature-v1" data-aos="fade-up" data-aos-delay="200" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%;">
+            <div class="wrap-icon mb-3">
+            </div>
+            <h3 style="color:#D63447">Education</h3>
+            <p>This web application serves to protect and educate users globally on safety and first-aid measures and practices</p>
+          </div> 
+        </div>
+      </div>
       <div class="unslate_co--section" id="gallery">
         <div class="container">
           
@@ -125,7 +161,7 @@
           <div class="portfolio-wrapper">
 
             <div class="d-flex align-items-center mb-4 gsap-reveal gsap-reveal-filter">
-              <h2 class="mr-auto heading-h2"><span class="gsap-reveal">Gallery</span></h2>
+              <h2 style=""; class="mr-auto heading-h2"><span class="gsap-reveal">Guide</span></h2>
 
               <!-- <a href="#" class="text-white js-filter d-inline-block d-lg-none">Filter</a>
               
@@ -178,18 +214,16 @@
                   </a>
               </div>
 
-              <div class="item web packaging col-sm-6 col-md-6 col-lg-4 isotope-mb-2">
-
-                <a href="images/img6.jpg" class="portfolio-item isotope-item gsap-reveal-img" data-fancybox="gallery" data-caption="Immigration">
+              <div class="item illustration packaging col-sm-6 col-md-6 col-lg-4 isotope-mb-2">
+                <a href="images/img4.jpg" class="portfolio-item isotope-item gsap-reveal-img" data-fancybox="gallery" data-caption="Industrialization">
                     <div class="overlay">
                       <span class="wrap-icon icon-photo2"></span>
                       <div class="portfolio-item-content">
-                        <h3>Immigration</h3>
+                        <h3>Industrialization</h3>
                       </div>
                     </div>
-                    <img src="images/img6.jpg" class="lazyload  img-fluid" alt="Images" />
+                    <img src="images/img4.jpg" class="lazyload  img-fluid" alt="Images" />
                   </a>
-
               </div>
 
               <div class="item illustration packaging col-sm-6 col-md-6 col-lg-4 isotope-mb-2">
@@ -204,39 +238,15 @@
                   </a>
               </div>
 
-              <div class="item web branding col-sm-6 col-md-6 col-lg-4 isotope-mb-2">
-                <a href="#" class="portfolio-item ajax-load-page item-portrait isotope-item gsap-reveal-img" data-id="2">
+                            <div class="item branding packaging illustration col-sm-6 col-md-6 col-lg-4 isotope-mb-2 ">
+                <a href="images/img2.jpg" class="portfolio-item ajax-load-page item-portrait isotope-item gsap-reveal-img" data-id="3">
                     <div class="overlay">
                       <span class="wrap-icon icon-link2"></span>
                       <div class="portfolio-item-content">
-                        <h3>Robber Barons & Captains of Industry</h3>
+                        <h3>Constitution</h3>
                       </div>
                     </div>
-                    <img src="images/img5.jpg" class="lazyload  img-fluid" alt="Images" />
-                  </a>
-              </div>
-
-              <div class="item branding packaging col-sm-6 col-md-6 col-lg-4 isotope-mb-2">
-                <a href="images/native.jpg" class="portfolio-item item-portrait isotope-item gsap-reveal-img" data-fancybox="gallery" data-caption="Native Americans">
-                    <div class="overlay">
-                      <span class="wrap-icon icon-photo2"></span>
-                      <div class="portfolio-item-content">
-                        <h3>Native Americans</h3>
-                      </div>
-                    </div>
-                    <img src="images/native.jpg" class="lazyload  img-fluid" alt="Images" />
-                  </a>
-              </div>
-
-              <div class="item web branding col-sm-6 col-md-6 col-lg-4 isotope-mb-2">
-                <a href="images/img8.jpg" class="portfolio-item item-portrait isotope-item gsap-reveal-img" data-fancybox="gallery" data-caption="Gilded Age">
-                    <div class="overlay">
-                      <span class="wrap-icon icon-play_circle_filled"></span>
-                      <div class="portfolio-item-content">
-                        <h3>Gilded Age</h3>
-                      </div>
-                    </div>
-                    <img src="images/img8.jpg" class="lazyload  img-fluid" alt="Images" />
+                    <img src="images/img2.jpg" class="lazyload  img-fluid" alt="Images" />
                   </a>
               </div>
             </div>
@@ -270,67 +280,10 @@
         </div>
       </div>
 
-      <div class="unslate_co--section" id="resources">
-        <div class="container">
-
-          <div class="section-heading-wrap text-center mb-5">
-            <h2 class="heading-h2 text-center divider"><span class="gsap-reveal">Topics & Materials</span></h2>
-            <span class="gsap-reveal"><img src="images/divider.png" alt="divider" width="76"></span>
-          </div>
-
-          <div class="row gutter-v3">
-            <div class="col-md-6 col-lg-4 mb-4">
-              <div class="feature-v1" data-aos="fade-up" data-aos-delay="0">
-                <div class="wrap-icon mb-3">
-                </div>
-                <h3>Resources</h3>
-                <p>The slideshows presented in class will be posted in <a href="https://drive.google.com/drive/folders/1UHwyTA6KfQD0rN3HxuPuG65N4Lz97rCI?usp=sharing">this folder </a>for you to check.</p>
-              </div> 
-            </div>
-            <div class="col-md-6 col-lg-4 mb-4">
-              <div class="feature-v1" data-aos="fade-up" data-aos-delay="100">
-                <div class="wrap-icon mb-3">
-                </div>
-                <h3>Google Classroom</h3>
-                <p>Click <a href="https://classroom.google.com/u/2/c/MzgwMTg3MDAxMzkx">here </a> to see google classroom with present, past, and upcoming assignments.</p>
-              </div> 
-            </div>
-            <div class="col-md-6 col-lg-4 mb-4">
-              <div class="feature-v1" data-aos="fade-up" data-aos-delay="200">
-                <div class="wrap-icon mb-3">
-                </div>
-                <h3>Calendar</h3>
-                <p>Click <a href="#calendar">here </a>to access the class calender to check out upcoming assignments & events.</p>
-              </div> 
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="unslate_co--section" id="calendar">
-        <div class="container">
-
-          <div class="section-heading-wrap text-center mb-5">
-            <h2 class="heading-h2 text-center divider"><span class="gsap-reveal">Calendar</span></h2>
-            <span class="gsap-reveal"><img src="images/divider.png" alt="divider" width="76"></span>
-          </div>
-
-          <div class="row gutter-v3">
-            <div class="col-md-6 col-lg-4 mb-4">
-              <div class="feature-v1" data-aos="fade-up" data-aos-delay="0">
-                <div class="wrap-icon mb-3">
-                  <iframe src="https://calendar.google.com/calendar/embed?src=c_classrooma23075ef%40group.calendar.google.com&ctz=America%2FLos_Angeles" style="border: 0" width="1110" height="600" frameborder="0" scrolling="no"></iframe>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div class="unslate_co--section section-counter" id="skills-section">
         <div class="container">
           <div class="section-heading-wrap text-center mb-5">
-            <h2 class="heading-h2 text-center divider"><span class="gsap-reveal">Fun Facts</span></h2>
+            <h2 class="heading-h2 text-center divider"><span class="gsap-reveal">Facts & Information</span></h2>
             <span class="gsap-reveal"><img src="images/divider.png" alt="divider" width="76"></span>
           </div>
 
@@ -339,33 +292,33 @@
             <div class="col-6 col-sm-6 mb-5 mb-lg-0 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="0">
               <div class="counter-v1 text-center">
                 <span class="number-wrap">
-                  <span class="number number-counter" data-number="27">27</span>
+                  <span class="number number-counter" data-number="27">9.5</span>
                 </span>
-                <span class="counter-label">Chapters</span>
+                <span class="counter-label">Largest Magnitude Earthquake</span>
               </div>
             </div>
             <div class="col-6 col-sm-6 mb-5 mb-lg-0 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
               <div class="counter-v1 text-center">
                 <span class="number-wrap">
-                  <span class="number number-counter" data-number="60">60</span>
+                  <span class="number number-counter" data-number="60">231</span>
                 </span>
-                <span class="counter-label">Students</span>
+                <span class="counter-label">Fastest Hurricaine Wind Speed</span>
               </div>
             </div>
             <div class="col-6 col-sm-6 mb-5 mb-lg-0 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
               <div class="counter-v1 text-center">
                 <span class="number-wrap">
-                  <span class="number number-counter" data-number="245">245</span>
+                  <span class="number number-counter" data-number="245">1720</span>
                 </span>
-                <span class="counter-label">Years of History</span>
+                <span class="counter-label">Tallest Tsunami Wave (meters)</span>
               </div>
             </div>
             <div class="col-6 col-sm-6 mb-5 mb-lg-0 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
               <div class="counter-v1 text-center">
                 <span class="number-wrap">
-                  <span class="number number-counter" data-number="46">46</span>
+                  <span class="number number-counter" data-number="46">1300</span>
                 </span>
-                <span class="counter-label">Presidents</span>
+                <span class="counter-label">Active Volcanos Worldwide</span>
               </div>
             </div>
           </div>
@@ -373,39 +326,6 @@
       </div>
 
 
-      <div class="unslate_co--section" id="contact">
-        <div class="container">
-          <div class="section-heading-wrap text-center mb-5">
-            <h2 class="heading-h2 text-center divider"><span class="gsap-reveal">Get In Touch</span></h2>
-            <span class="gsap-reveal"><img src="images/divider.png" alt="divider" width="76"></span>
-          </div>
-
-
-          <div class="row justify-content-between">
-            
-
-            </div>
-
-            <div class="col-md-4">
-              <div class="contact-info-v1">
-                <div class="gsap-reveal d-block">
-                  <span class="d-block contact-info-label">Email</span>
-                  <a href="#" class="contact-info-val">jelam@fusdk12.net</a>
-                </div>
-                <div class="gsap-reveal d-block">
-                  <span class="d-block contact-info-label">Phone</span>
-                  <a href="#" class="contact-info-val">(510) 796-1776 ex: 57319</a>
-                </div>
-                <div class="gsap-reveal d-block">
-                  <span class="d-block contact-info-label">Address</span>
-                  <address class="contact-info-val">36300 Fremont Blvd, Fremont,<br> CA, 94536</address>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      </div> <!-- END .unslate_co-site-inner -->
 
       <footer style="background-color: black  ;"class="unslate_co--footer unslate_co--section">
         <div class="container">
@@ -431,4 +351,39 @@
     <script src="js/main.js"></script>
 
   </body>
+    <script>
+      // JavaScript code to get user's location and update iframe URL
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+      } else {
+        console.log("Geolocation is not supported by this browser.");
+      }
+
+      function successCallback(position) {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+
+        // Update iframe URL with user's location
+        const iframe = document.getElementById("locationIframe");
+        iframe.src = `https://classic.nullschool.net/#current/wind/surface/level/orthographic=${longitude},${latitude},318/loc=${longitude},${latitude}`;
+      }
+
+      function errorCallback(error) {
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            console.log("User denied the request for Geolocation.");
+            break;
+          case error.POSITION_UNAVAILABLE:
+            console.log("Location information is unavailable.");
+            break;
+          case error.TIMEOUT:
+            console.log("The request to get user location timed out.");
+            break;
+          case error.UNKNOWN_ERROR:
+            console.log("An unknown error occurred.");
+            break;
+        }
+      }
+    </script>
+
 </html>
