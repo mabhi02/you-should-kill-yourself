@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>DarkPan - Bootstrap 5 Admin Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+
+        .map-container {
+
+            position: relative;
+            display: block;
+            height: 100vh; /* Adjust this height if needed */
+        }
+    </style>
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet"> 
+    
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <style>
+        /* Additional CSS for hiding the sidebar by default */
+        @media (max-width: 991.98px) {
+            .sidebar {
+                display: none !important;
+            }
+
+            .content {
+                margin-left: 0 !important;
+            }
+        }
+
+        /* Additional CSS for toggling the sidebar */
+        @media (min-width: 992px) {
+            .toggle-sidebar .sidebar {
+                display: none !important;
+            }
+
+            .toggle-sidebar .content {
+                margin-left: 0 !important;
+            }
+
+            /* Adjust the page dimensions */
+            .toggle-sidebar .container-fluid {
+                flex-direction: row-reverse;
+            }
+
+            .toggle-sidebar .sidebar,
+            .toggle-sidebar .content {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body class="toggle-sidebar">
+    <div class="container-fluid position-relative d-flex p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+        <!-- Sidebar Start -->
+        <div class="sidebar pe-4 pb-3">
+            <!-- ... (your existing sidebar code) ... -->
+        </div>
+        <!-- Sidebar End -->
+
+        <!-- Content Start -->
+        <!-- Content Start -->
+        <div class="content">
+            <!-- Navbar Start -->
+            <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
+                <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
+                    <h2 class="text-primary mb-0"><i class="fa fa-user-edit"></i></h2>
+                </a>
+                <a href="#" class="sidebar-toggler flex-shrink-0">
+                    <i class="fa fa-bars"></i>
+                </a>
+<form class="d-none d-md-flex ms-4">
+    <div class="input-group" style="width: 200%;">
+        <input class="form-control bg-dark border-0" type="search" placeholder="Address">
+        <input class="form-control bg-dark border-0" type="search" placeholder="Longitude">
+        <input class="form-control bg-dark border-0" type="search" placeholder="Latitude">
+        <button class="btn btn-primary" type="submit">Enter</button>
+    </div>
+</form>
+
+                <div class="navbar-nav align-items-center ms-auto">
+                    <div class="nav-item dropdown">
+                        
+                    </div>
+                    <div style='color:transparent;'; class="nav-item dropdown">
+                        <a style='color:#191C24;'; href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                            <i style='background:transparent;color:transparent;' ;l class="fa fa-bell me-lg-2"></i>
+                            <span style='color:transparent;'; class="d-none d-lg-inline-flex">Crisis Notification</span>
+                        </a>
+                        <div style='color:transparent;'; class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0" id="notificationDropdown">
+                            <!-- Notifications will be dynamically added here -->
+                        </div>
+                    </div>
+
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <span class="d-none d-lg-inline-flex">Menu</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                            <a href="#" class="dropdown-item">My Profile</a>
+                            <a href="#" class="dropdown-item">Settings</a>
+                            <a href="#" class="dropdown-item">Log Out</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <!-- Navbar End -->
+            <!-- Sale & Revenue Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-chart-line fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Today Sale</p>
+                                <h6 class="mb-0">$1234</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-chart-bar fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Total Sale</p>
+                                <h6 class="mb-0">$1234</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-chart-area fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Today Revenue</p>
+                                <h6 class="mb-0">$1234</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-chart-pie fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Total Revenue</p>
+                                <h6 class="mb-0">$1234</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Sale & Revenue End -->
+            <!-- Sales Chart Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+                    <div class="col-sm-12 col-xl-6">
+                        <div class="bg-secondary text-center rounded p-4">
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <h6 class="mb-0">Worldwide Sales</h6>
+                                <a href="">Show All</a>
+                            </div>
+                            <canvas id="worldwide-sales"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-xl-6">
+                        <div class="bg-secondary rounded h-100 p-4">
+                        <div style='height:280px'; id="map"></div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Sales Chart End -->
+            <!-- Recent Sales Start
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary text-center rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0">Recent Salse</h6>
+                        <a href="">Show All</a>
+                    </div>
+                    <div class="table-responsive">
+    <iframe
+        width="100%"
+        height="500"
+        frameborder="0"
+        style="border:0"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.331501933244!2dYOUR_LONGITUDE!3dYOUR_LATITUDE!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zYOUR_LATITUDE!4vYOUR_LONGITUDE"
+        allowfullscreen
+    ></iframe>                        
+                    </div>
+                </div>
+            </div>
+             Recent Sales End -->
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-sm-12 col-md-6 col-xl-4">
+            <div class="bg-secondary rounded h-100 p-4">
+                <h6 class="mb-4">Single Line Chart</h6>
+                <canvas id="line-chart"></canvas>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-xl-4">
+            <div class="bg-secondary rounded h-100 p-4">
+                <h6 class="mb-4">Multiple Line Chart</h6>
+                <canvas id="salse-revenue"></canvas>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-xl-4">
+            <div class="bg-secondary rounded h-100 p-4">
+                <h6 class="mb-4">Single Bar Chart</h6>
+                <canvas id="bar-chart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Chart End -->
+       
+
+
+
+
+            <!-- Recent Sales Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary text-center rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0">Recent Salse</h6>
+                        <a href="">Show All</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table text-start align-middle table-bordered table-hover mb-0">
+                            <thead>
+                                <tr class="text-white">
+                                    <th scope="col"><input class="form-check-input" type="checkbox"></th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Invoice</th>
+                                    <th scope="col">Customer</th>
+                                    <th scope="col">Amount</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input class="form-check-input" type="checkbox"></td>
+                                    <td>01 Jan 2045</td>
+                                    <td>INV-0123</td>
+                                    <td>Jhon Doe</td>
+                                    <td>$123</td>
+                                    <td>Paid</td>
+                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                                </tr>
+                                <tr>
+                                    <td><input class="form-check-input" type="checkbox"></td>
+                                    <td>01 Jan 2045</td>
+                                    <td>INV-0123</td>
+                                    <td>Jhon Doe</td>
+                                    <td>$123</td>
+                                    <td>Paid</td>
+                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                                </tr>
+                                <tr>
+                                    <td><input class="form-check-input" type="checkbox"></td>
+                                    <td>01 Jan 2045</td>
+                                    <td>INV-0123</td>
+                                    <td>Jhon Doe</td>
+                                    <td>$123</td>
+                                    <td>Paid</td>
+                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                                </tr>
+                                <tr>
+                                    <td><input class="form-check-input" type="checkbox"></td>
+                                    <td>01 Jan 2045</td>
+                                    <td>INV-0123</td>
+                                    <td>Jhon Doe</td>
+                                    <td>$123</td>
+                                    <td>Paid</td>
+                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                                </tr>
+                                <tr>
+                                    <td><input class="form-check-input" type="checkbox"></td>
+                                    <td>01 Jan 2045</td>
+                                    <td>INV-0123</td>
+                                    <td>Jhon Doe</td>
+                                    <td>$123</td>
+                                    <td>Paid</td>
+                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Recent Sales End -->
+
+
+
+<!-- Footer Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-secondary rounded-top p-2 text-center">
+        <div class="row">
+            <div class="col-12">
+                <p class="m-0">
+                    &copy; <a href="#" class="text-white">Kill Yourself</a>, All Rights Reserved.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer End -->
+
+        </div>
+        <!-- Content End -->
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        // Replace these values with your desired latitude and longitude
+        var latitude = 42.72876761954724;
+        var longitude = -78.01371936852176;
+
+        var mapContainer = document.getElementById('map');
+        var map = L.map(mapContainer).setView([latitude, longitude], 13);
+
+        L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors, © CartoDB'
+        }).addTo(map);
+
+        L.marker([latitude, longitude]).addTo(map)
+            .bindPopup('Your custom location!')
+            .openPopup();
+
+        // Set the height of the map container based on its parent's height
+        mapContainer.style.height = mapContainer.parentElement.clientHeight + 'px';
+
+        // Function to update map size on window resize
+        function updateMapSize() {
+            map.invalidateSize();
+            mapContainer.style.height = mapContainer.parentElement.clientHeight + 'px';
+        }
+
+        // Attach the function to the window resize event
+        window.addEventListener('resize', updateMapSize);
+
+        // Trigger the function once on page load
+        updateMapSize();
+    </script>
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/chart/chart.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>
