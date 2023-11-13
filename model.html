@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fire Prediction</title>
+  <style>
+    #loading {
+      display: none;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+</head>
+<body>
+  <h1>Fire Prediction</h1>
+
+  <form>
+    Latitude: <input type="text" id="latitude"><br>
+    Longitude: <input type="text" id="longitude"><br>
+    <button type="button" onclick="loadModel()">Predict Probability</button>
+  </form>
+
+  <div id="loading">
+    <p>Loading model...</p>
+    <progress id="progress" max="100" value="0"></progress>
+  </div>
+
+  <div id="result"></div>
+
+  <script>
+    let trainedModel;
+    let isLoading = false;
+
+    async function loadModel() {
+      const latitude = parseFloat(document.getElementById('latitude').value);
+      const longitude = parseFloat(document.getElementById('longitude').value);
+
+      if (isNaN(latitude) || isNaN(longitude)) {
+        alert('Please enter valid latitude and longitude.');
+        return;
+      }
+
+      isLoading = true;
+      document.getElementById('loading').style.display = 'block';
+
+      const response = await fetch('fire.csv');
+      const csvData = await response.text();
+      const parsedData = parseData(csvData);
+
+      const { inputs, labels } = prepareData(parsedData);
+      trainedModel = createModel();
+      await trainModel(trainedModel, inputs, labels);
+
+      isLoading = false;
+      document.getElementById('loading').style.display = 'none';
+      predict(latitude, longitude);
+    }
+
+    function parseData(csv) {
+      const lines = csv.split('\n');
+      const data = [];
+
+      for (let i = 1; i < lines.length; i++) {
+        const values = lines[i].split(',');
+        const date = new Date(values[9]); // Assuming 'disc_clean_date' is in the 9th column
+        const latitude = parseFloat(values[6]);
+        const longitude = parseFloat(values[7]);
+
+        if (!isNaN(latitude) && !isNaN(longitude)) {
+          data.push({ date, latitude, longitude });
+        }
+      }
+
+      return data;
+    }
+
+    function prepareData(data) {
+      const inputs = data.map(entry => [entry.latitude, entry.longitude]);
+      const labels = data.map(entry => 1); // Assuming all instances are considered as fire occurrences
+
+      return { inputs, labels };
+    }
+
+    function createModel() {
+      const model = tf.sequential();
+      model.add(tf.layers.dense({ units: 1, inputShape: [2] }));
+      model.compile({ optimizer: 'sgd', loss: 'meanSquaredError' });
+
+      return model;
+    }
+
+    async function trainModel(model, inputs, labels) {
+      const xs = tf.tensor2d(inputs);
+      const ys = tf.tensor1d(labels);
+
+      await model.fit(xs, ys, {
+        epochs: 100,
+        callbacks: {
+          onEpochEnd: (epoch, logs) => {
+            const progress = (epoch + 1) / 100 * 100; // Calculate progress percentage
+            document.getElementById('progress').value = progress;
+          }
+        }
+      });
+
+      xs.dispose();
+      ys.dispose();
+    }
+
+    function predict(latitude, longitude) {
+      if (!trainedModel) {
+        alert('Model not loaded yet. Please wait.');
+        return;
+      }
+
+      const firesInRadius = getFiresInRadius(latitude, longitude);
+      const inputTensor = tf.tensor2d([[latitude, longitude]]);
+      const prediction = trainedModel.predict(inputTensor);
+      const probability = prediction.dataSync()[0];
+
+      document.getElementById('result').innerText = `Predicted Probability: ${probability.toFixed(4)}`;
+    }
+
+    function getFiresInRadius(userLatitude, userLongitude) {
+      const radius = 100; // in miles
+      return parseData(csvData).filter(entry => calculateDistance(userLatitude, userLongitude, entry.latitude, entry.longitude) <= radius);
+    }
+
+    function calculateDistance(lat1, lon1, lat2, lon2) {
+      const R = 3958.8; // Earth radius in miles
+      const dLat = toRadians(lat2 - lat1);
+      const dLon = toRadians(lon2 - lon1);
+      const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      return R * c;
+    }
+
+    function toRadians(degrees) {
+      return degrees * (Math.PI / 180);
+    }
+  </script>
+</body>
+</html>
