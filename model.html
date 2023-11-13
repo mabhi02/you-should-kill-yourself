@@ -3,55 +3,178 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Disaster Identification</title>
+  <title>Fire Prediction</title>
+  <style>
+    #loading {
+      display: none;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
 </head>
 <body>
-  <h1>Disaster Identification</h1>
-  <input type="file" accept="image/*" onchange="processImage(event)">
-  <img id="inputImage" style="max-width: 400px;">
-  <p id="result">Result: </p>
+  <h1>Fire Prediction</h1>
 
-  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-  <script>
-    async function loadModel() {
-      const model = await tf.loadLayersModel('http://localhost:8000/model.json');
-      return model;
+  <form>
+    Latitude: <input type="text" id="latitude"><br>
+    Longitude: <input type="text" id="longitude"><br>
+    Current Date: <input type="text" id="currentDate" placeholder="MM/DD/YYYY"><br>
+    <button type="button" onclick="loadModel()">Predict Probability</button>
+  </form>
+
+  <div id="loading">
+    <p>Loading model...</p>
+    <progress id="progress" max="100" value="0"></progress>
+  </div>
+
+  <div id="result"></div>
+
+<script>
+  let trainedModel;
+  let isLoading = false;
+  let csvData;
+
+  async function loadModel() {
+    const latitude = parseFloat(document.getElementById('latitude').value);
+    const longitude = parseFloat(document.getElementById('longitude').value);
+    const currentDateInput = document.getElementById('currentDate').value;
+
+    if (isNaN(latitude) || isNaN(longitude) || !currentDateInput) {
+      alert('Please enter valid latitude, longitude, and current date.');
+      return;
     }
 
-    async function processImage(event) {
-      const file = event.target.files[0];
-      const reader = new FileReader();
+    const currentDateParts = currentDateInput.split('/');
+    const currentMonth = parseInt(currentDateParts[0], 10);
+    const currentDay = parseInt(currentDateParts[1], 10);
+    const currentYear = parseInt(currentDateParts[2], 10);
+    const currentDate = new Date(currentYear, currentMonth - 1, currentDay);
 
-      reader.onload = async function () {
-        const image = new Image();
-        image.src = reader.result;
-        image.onload = async function () {
-          const model = await loadModel();
-          const predictions = await predict(model, image);
+    isLoading = true;
+    document.getElementById('loading').style.display = 'block';
 
-          const resultElement = document.getElementById('result');
-          resultElement.textContent = 'Result: ' + predictions;
-        };
-      };
+    const response = await fetch('https://raw.githubusercontent.com/mabhi02/you-should-kill-yourself/main/fire.csv');
+    csvData = await response.text();
+    const parsedData = parseData(csvData, currentDate);
 
-      reader.readAsDataURL(file);
+    const { inputs, labels } = prepareData(parsedData);
+    trainedModel = createModel();
+
+    for (let epoch = 0; epoch < 10; epoch++) {
+      const xs = tf.tensor2d(inputs);
+      const ys = tf.tensor1d(labels);
+
+      await trainedModel.fit(xs, ys, {
+        epochs: 1,
+        shuffle: true,
+        callbacks: {
+          onEpochEnd: (epoch, logs) => {
+            const progress = (epoch + 1) / 10 * 100;
+            document.getElementById('progress').value = progress;
+          }
+        }
+      });
+
+      xs.dispose();
+      ys.dispose();
     }
 
-    async function predict(model, image) {
-      const tensor = tf.browser.fromPixels(image)
-        .resizeBilinear([224, 224])
-        .toFloat()
-        .expandDims();
+    isLoading = false;
+    document.getElementById('loading').style.display = 'none';
+    predict(latitude, longitude, currentDate);
+  }
 
-      const predictions = await model.predict(tensor).data();
-      const topPrediction = getTopPrediction(predictions);
-      return topPrediction;
+  function parseData(csv, currentDate) {
+    const lines = csv.split('\n');
+    const data = [];
+
+    for (let i = 1; i < lines.length; i++) {
+      const values = lines[i].split(',');
+
+      if (values && values.length >= 10) {
+        const dateString = values[9];
+        const dateParts = dateString.split('/');
+        const month = parseInt(dateParts[0], 10);
+        const day = parseInt(dateParts[1], 10);
+        const year = parseInt(dateParts[2], 10);
+        
+        const date = new Date(year, month - 1, day);
+        console.log('Parsed Date:', date);
+
+        const latitude = parseFloat(values[6]);
+        const longitude = parseFloat(values[7]);
+
+        if (!isNaN(latitude) && !isNaN(longitude) && !isNaN(date.getTime())) {
+          data.push({ date, latitude, longitude });
+        }
+      }
     }
 
-    function getTopPrediction(predictions) {
-      const maxIndex = predictions.indexOf(Math.max(...predictions));
-      return maxIndex;
+    const filteredData = data.filter(entry => entry.date.getTime() <= currentDate.getTime());
+    return filteredData;
+  }
+
+  function prepareData(data) {
+    const inputs = data.map(entry => [entry.latitude, entry.longitude, entry.date.getTime()]);
+    const labels = data.map(entry => 1);
+    return { inputs, labels };
+  }
+
+  function createModel() {
+    const model = tf.sequential();
+    model.add(tf.layers.dense({ units: 1, inputShape: [3] }));
+    model.compile({ optimizer: 'sgd', loss: 'meanSquaredError' });
+    return model;
+  }
+
+  function predict(latitude, longitude, currentDate) {
+    console.log('Inputs:', latitude, longitude, currentDate);
+
+    if (!trainedModel || isNaN(latitude) || isNaN(longitude) || isNaN(currentDate.getTime())) {
+      alert('Invalid inputs or model not loaded yet. Please wait.');
+      return;
     }
-  </script>
+
+    const firesInRadius = getFiresInRadius(latitude, longitude);
+
+    // Adjust the date format consistently
+    const inputDate = currentDate.toISOString().split('T')[0];
+    const formattedDate = inputDate.split('-').reverse().join('/');
+    
+    const inputTensor = tf.tensor2d([[latitude, longitude, formattedDate]]);
+    console.log('Input Tensor Values:', inputTensor.arraySync());
+
+    const prediction = trainedModel.predict(inputTensor);
+    const probability = prediction.dataSync()[0];
+    console.log('Raw Prediction:', probability);
+
+    document.getElementById('result').innerText = `Predicted Probability: ${probability.toFixed(4)}`;
+  }
+
+
+
+
+  function getFiresInRadius(userLatitude, userLongitude) {
+    const radius = 100;
+    return parseData(csvData, new Date()).filter(entry => calculateDistance(userLatitude, userLongitude, entry.latitude, entry.longitude) <= radius);
+  }
+
+  function calculateDistance(lat1, lon1, lat2, lon2) {
+    const R = 3958.8;
+    const dLat = toRadians(lat2 - lat1);
+    const dLon = toRadians(lon2 - lon1);
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
+      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+  }
+
+  function toRadians(degrees) {
+    return degrees * (Math.PI / 180);
+  }
+</script>
+
+
 </body>
 </html>
