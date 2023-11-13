@@ -39,7 +39,8 @@ from tensorflow.keras.layers import Dense
 
 df = pd.read_csv("/data/earthquake_1995-2023.csv")
 df
-
+lat1= 12
+lon1 = -87
 def haversine_distance(lat1,lon1,lat2,lon2):
   R = 3959.0
   lat1,lon1,lat2,lon2 = map(math.radians,[lat1,lon1,lat2,lon2])
@@ -78,8 +79,6 @@ df = df[columns]
 
 df.head()
 
-lat1= 12
-lon1 = -87
 
 X = df[['longitude', 'latitude']]
 Y = df[['magnitude']]
