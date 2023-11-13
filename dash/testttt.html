@@ -101,7 +101,7 @@
         <div class="content">
             <!-- Navbar Start -->
             <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
-                <a class='navbar-brand d-flex d-lg-none me-4' href='/dash/'>
+                <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
                     <h2 class="text-primary mb-0"><i class="fa fa-user-edit"></i></h2>
                 </a>
                 <a href="#" class="sidebar-toggler flex-shrink-0">
@@ -185,110 +185,16 @@
                 </div>
             </div>
             <!-- Sale & Revenue End -->
-
-            <!-- Sales Chart Start -->
-<!-- Recent Sales Start -->
-<!--                         
-
+            <!-- Recent Sales Start -->
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-secondary text-center rounded p-4">
-                    <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Recent Salse</h6>
-                        <a href="">Show All</a>
-                    </div>
                     <div class="table-responsive">
-                        <table class="table text-start align-middle table-bordered table-hover mb-0">
-                            <thead>
-                                <tr class="text-white">
-                                    <th scope="col"><input class="form-check-input" type="checkbox"></th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Invoice</th>
-                                    <th scope="col">Customer</th>
-                                    <th scope="col">Amount</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                </tr>
-                                <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                </tr>
-                                <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                </tr>
-                                <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                </tr>
-                                <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div style='height:480px'; id="map"></div>
+
                     </div>
                 </div>
-            </div-->
+            </div>
             <!-- Recent Sales End -->
-            <!-- Sales Chart End -->
-            <!-- Recent Sales Start
-            <div class="container-fluid pt-4 px-4">
-                <div class="bg-secondary text-center rounded p-4">
-                    <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Recent Salse</h6>
-                        <a href="">Show All</a>
-                    </div>
-                    <div class="table-responsive">
-    <iframe
-        width="100%"
-        height="500"
-        frameborder="0"
-        style="border:0"
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.331501933244!2dYOUR_LONGITUDE!3dYOUR_LATITUDE!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zYOUR_LATITUDE!4vYOUR_LONGITUDE"
-        allowfullscreen
-    ></iframe>                        
-                    </div>
-                </div>
-            </div>
-             Recent Sales End -->
-<!-- Recent Sales Start -->
-            <div class="container-fluid pt-4 px-4">
-                <div class="bg-secondary text-center rounded p-4">
-                    <div style='height:380px'; id="map"></div>                    
-                </div>
-            </div>
-            <!-- Recent Sales End -->             
 <div class="container-fluid pt-4 px-4">
     <div class="row g-4">
         <div class="col-sm-12 col-md-6 col-xl-4">
@@ -309,15 +215,26 @@
                 <canvas id="bar-chart"></canvas>
             </div>
         </div>
+        <div class="col-sm-12 col-md-6 col-xl-4">
+            <div class="bg-secondary rounded h-100 p-4">
+                <h6 class="mb-4">Multiple Bar Chart</h6>
+                <canvas id="worldwide-sales"></canvas>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-xl-4">
+            <div class="bg-secondary rounded h-100 p-4">
+                <h6 class="mb-4">Pie Chart</h6>
+                <canvas id="pie-chart"></canvas>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-xl-4">
+            <div class="bg-secondary rounded h-100 p-4">
+                <h6 class="mb-4">Doughnut Chart</h6>
+                <canvas id="doughnut-chart"></canvas>
+            </div>
+        </div>
     </div>
 </div>
-<!-- Chart End -->
-       
-
-
-
-
-            <!-- Recent Sales Start -->
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-secondary text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
@@ -388,8 +305,79 @@
                     </div>
                 </div>
             </div>
-            <!-- Recent Sales End -->
 
+
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary text-center rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0">Recent Salse</h6>
+                        <a href="">Show All</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table text-start align-middle table-bordered table-hover mb-0">
+                            <thead>
+                                <tr class="text-white">
+                                    <th scope="col"><input class="form-check-input" type="checkbox"></th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Invoice</th>
+                                    <th scope="col">Customer</th>
+                                    <th scope="col">Amount</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input class="form-check-input" type="checkbox"></td>
+                                    <td>01 Jan 2045</td>
+                                    <td>INV-0123</td>
+                                    <td>Jhon Doe</td>
+                                    <td>$123</td>
+                                    <td>Paid</td>
+                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                                </tr>
+                                <tr>
+                                    <td><input class="form-check-input" type="checkbox"></td>
+                                    <td>01 Jan 2045</td>
+                                    <td>INV-0123</td>
+                                    <td>Jhon Doe</td>
+                                    <td>$123</td>
+                                    <td>Paid</td>
+                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                                </tr>
+                                <tr>
+                                    <td><input class="form-check-input" type="checkbox"></td>
+                                    <td>01 Jan 2045</td>
+                                    <td>INV-0123</td>
+                                    <td>Jhon Doe</td>
+                                    <td>$123</td>
+                                    <td>Paid</td>
+                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                                </tr>
+                                <tr>
+                                    <td><input class="form-check-input" type="checkbox"></td>
+                                    <td>01 Jan 2045</td>
+                                    <td>INV-0123</td>
+                                    <td>Jhon Doe</td>
+                                    <td>$123</td>
+                                    <td>Paid</td>
+                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                                </tr>
+                                <tr>
+                                    <td><input class="form-check-input" type="checkbox"></td>
+                                    <td>01 Jan 2045</td>
+                                    <td>INV-0123</td>
+                                    <td>Jhon Doe</td>
+                                    <td>$123</td>
+                                    <td>Paid</td>
+                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        
 
 
 <!-- Footer Start -->
@@ -414,71 +402,35 @@
     </div>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Replace these values with your desired latitude and longitude
-            var latitude = 42.72876761954724;
-            var longitude = -78.01371936852176;
+        // Replace these values with your desired latitude and longitude
+        var latitude = 42.72876761954724;
+        var longitude = -78.01371936852176;
 
-            var mapContainer = document.getElementById('map');
-            var map = L.map(mapContainer).setView([latitude, longitude], 13);
+        var mapContainer = document.getElementById('map');
+        var map = L.map(mapContainer).setView([latitude, longitude], 13);
 
-            L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png', {
-                attribution: '© OpenStreetMap contributors, © CartoDB'
-            }).addTo(map);
+        L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors, © CartoDB'
+        }).addTo(map);
 
-            L.marker([latitude, longitude]).addTo(map)
-                .bindPopup('Your custom location!')
-                .openPopup();
+        L.marker([latitude, longitude]).addTo(map)
+            .bindPopup('Your custom location!')
+            .openPopup();
 
-            // Set the height of the map container based on its parent's height
+        // Set the height of the map container based on its parent's height
+        mapContainer.style.height = mapContainer.parentElement.clientHeight + 'px';
+
+        // Function to update map size on window resize
+        function updateMapSize() {
+            map.invalidateSize();
             mapContainer.style.height = mapContainer.parentElement.clientHeight + 'px';
+        }
 
-            // Function to update map size on window resize
-            function updateMapSize() {
-                map.invalidateSize();
-                mapContainer.style.height = mapContainer.parentElement.clientHeight + 'px';
-            }
+        // Attach the function to the window resize event
+        window.addEventListener('resize', updateMapSize);
 
-            // Attach the function to the window resize event
-            window.addEventListener('resize', updateMapSize);
-
-            // Trigger the function once on page load
-            updateMapSize();
-
-            // Check if the canvas element exists before initializing the chart
-            var worldwideSalesCanvas = document.getElementById('worldwide-sales');
-            if (worldwideSalesCanvas) {
-                // Code to initialize the chart using the canvas
-                var worldwideSalesChart = new Chart(worldwideSalesCanvas, {
-                    // Your chart configuration options
-                });
-            }
-
-            // Similar checks for other charts
-            var lineChartCanvas = document.getElementById('line-chart');
-            if (lineChartCanvas) {
-                // Code to initialize the line chart using the canvas
-                var lineChart = new Chart(lineChartCanvas, {
-                    // Your line chart configuration options
-                });
-            }
-
-            var salseRevenueCanvas = document.getElementById('salse-revenue');
-            if (salseRevenueCanvas) {
-                // Code to initialize the salse revenue chart using the canvas
-                var salseRevenueChart = new Chart(salseRevenueCanvas, {
-                    // Your salse revenue chart configuration options
-                });
-            }
-
-            var barChartCanvas = document.getElementById('bar-chart');
-            if (barChartCanvas) {
-                // Code to initialize the bar chart using the canvas
-                var barChart = new Chart(barChartCanvas, {
-                    // Your bar chart configuration options
-                });
-            }
-        });
+        // Trigger the function once on page load
+        updateMapSize();
     </script>
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
