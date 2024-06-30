@@ -134,7 +134,7 @@ def ecolife():
                            user=user)
 
 def get_optimal_meal_times(events):
-    openai.api_key = "sk-proj-vp7yzLWGvsYVWqG9hpO9T3BlbkFJHRMRIHYxsmf2bQrTzLvM"
+    openai.api_key = ""
 
     prompt = f"Based on the following schedule, suggest optimal and healthiest times for breakfast, lunch, and dinner. Only provide the hour in 24-hour format and the food in each line: {events}"
     response = openai.ChatCompletion.create(
