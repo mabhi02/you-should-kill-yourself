@@ -66,7 +66,7 @@ print(restaurant_names)
 #eat out
 eatOut = 5 #Get this value from the form
 specifications = "Mexican" #Get value from the form
-call = "python eatOut.py AIzaSyDoCCNgmaUfYf526pxNbzALKswaThqMByc 37.7749,-122.4194 Mexican"
+call = "python eatOut.py APIKEY 37.7749,-122.4194 Mexican"
 
 
 
