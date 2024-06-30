@@ -34,6 +34,15 @@ def get_calendar_service():
     service = build('calendar', 'v3', credentials=credentials)
     return service
 
+def get_user_rank_and_top_9():
+    all_users = list(log_collection.find({}, {'_id': 1, 'name': 1, 'points': 1}).sort([('points', -1), ('_id', 1)]))
+    user_id = ObjectId(session['user_id'])
+    user_rank = next((index for (index, d) in enumerate(all_users) if d["_id"] == user_id), None)
+    top_9 = all_users[:8] if user_rank is None or user_rank >= 8 else all_users[:9]
+    if user_rank >= 8:
+        top_9.append(all_users[user_rank])
+    return user_rank + 1, top_9  # +1 because enumerate starts from 0
+
 @app.route('/')
 def home():
     if 'user_id' in session:
@@ -93,7 +102,6 @@ def ecolife():
     if 'user_id' not in session:
         return redirect(url_for('home'))
 
-    # Check if we have already authenticated with Google
     if 'credentials' not in session:
         return redirect(url_for('authorize'))
 
@@ -105,7 +113,6 @@ def ecolife():
                                           orderBy='startTime').execute()
     events = events_result.get('items', [])
 
-    # Create an events dictionary with hours as keys
     events_dict = {}
     for event in events:
         start = event['start'].get('dateTime', event['start'].get('date'))
@@ -114,7 +121,17 @@ def ecolife():
 
     meal_times = get_optimal_meal_times(events_dict)
 
-    return render_template('ecolife.html', name=session['name'], points=session['points'], meal_times=meal_times, events=events_dict)
+    user_rank, top_9 = get_user_rank_and_top_9()
+    user = log_collection.find_one({"_id": ObjectId(session['user_id'])})
+
+    return render_template('ecolife.html', 
+                           name=session['name'], 
+                           points=session['points'], 
+                           meal_times=meal_times, 
+                           events=events_dict, 
+                           user_rank=user_rank, 
+                           top_9=top_9,
+                           user=user)
 
 def get_optimal_meal_times(events):
     openai.api_key = "sk-proj-vp7yzLWGvsYVWqG9hpO9T3BlbkFJHRMRIHYxsmf2bQrTzLvM"
@@ -187,7 +204,7 @@ def oauth2callback():
 
     if not session['state'] == request.args['state']:
         flash('State mismatch. Possible CSRF attack.')
-        return redirect(url_for('home'))  # Prevent CSRF
+        return redirect(url_for('home'))
 
     credentials = flow.credentials
     session['credentials'] = credentials_to_dict(credentials)
@@ -201,6 +218,18 @@ def credentials_to_dict(credentials):
             'client_id': credentials.client_id,
             'client_secret': credentials.client_secret,
             'scopes': credentials.scopes}
+
+@app.route('/get_leaderboard')
+def get_leaderboard():
+    user_rank, top_9 = get_user_rank_and_top_9()
+    return jsonify({
+        'user_rank': user_rank,
+        'top_9': [{
+            'name': user['name'],
+            'points': user['points'],
+            'is_current_user': str(user['_id']) == session['user_id']
+        } for user in top_9]
+    })
 
 if __name__ == '__main__':
     app.run(debug=True)

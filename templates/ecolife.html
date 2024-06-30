@@ -37,6 +37,7 @@
             transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
+            overflow-y:
         }
 
         .sidebar:hover, .schedule:hover {
@@ -122,6 +123,11 @@
             box-shadow: 0 4px 8px rgba(100, 255, 218, 0.2);
         }
 
+        .leaderboard-item.highlight {
+            background-color: #2a9d8f;
+            box-shadow: 0 0 15px #64ffda;
+        }
+
         .leaderboard h2, .schedule h2, .main h1 {
             font-family: 'Roboto', sans-serif;
             font-size: 24px;
@@ -133,46 +139,6 @@
             font-size: 36px;
             margin-bottom: 30px;
             text-shadow: 0 0 10px rgba(100, 255, 218, 0.5);
-        }
-
-        .schedule-item {
-            background-color: #1d3557;
-            margin-bottom: 15px;
-            padding: 15px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-
-        .schedule-item:hover {
-            transform: translateX(5px);
-            box-shadow: 0 4px 8px rgba(100, 255, 218, 0.2);
-        }
-
-        .meal-time {
-            background-color: #2a9d8f;
-            color: #fff;
-        }
-
-        .meal-time:hover {
-            transform: translateX(5px);
-            box-shadow: 0 4px 8px rgba(42, 157, 143, 0.2);
-        }
-
-        .event-time {
-            background-color: #e76f51;
-            color: #fff;
-        }
-
-        .event-time:hover {
-            transform: translateX(5px);
-            box-shadow: 0 4px 8px rgba(231, 111, 81, 0.2);
-        }
-
-        .schedule-item i {
-            margin-right: 10px;
-            color: #64ffda;
         }
 
         #greeting {
@@ -205,31 +171,12 @@
             color: #64ffda;
         }
 
-        .highlight {
-            background-color: #64ffda;
-            color: #0a192f;
-            box-shadow: 0 4px 8px rgba(255, 255, 0, 0.2);
-        }
-
-        .glow {
-            animation: glow 1s infinite alternate;
-        }
-
-        @keyframes glow {
-            from {
-                box-shadow: 0 0 5px #64ffda, 0 0 10px #64ffda, 0 0 15px #64ffda, 0 0 20px #64ffda, 0 0 25px #64ffda;
-            }
-            to {
-                box-shadow: 0 0 10px #64ffda, 0 0 15px #64ffda, 0 0 20px #64ffda, 0 0 25px #64ffda, 0 0 30px #64ffda;
-            }
-        }
-
         .calendar {
             display: grid;
             grid-template-rows: repeat(24, 1fr);
             gap: 5px;
-            max-height: 560px; /* Adjust this height as needed */
-            overflow-x: hidden; /* Disable vertical scrolling */
+            max-height: 560px;
+            overflow-x: hidden;
             scroll-behavior: smooth;
         }
 
@@ -282,7 +229,8 @@
         }
 
         .current-hour {
-            animation: current-glow 1s infinite alternate;
+            border: 2px solid #64ffda;
+            border-radius: 10px;
         }
 
         @keyframes current-glow {
@@ -324,23 +272,24 @@
         }
     </style>
 </head>
-
 <body>
     <div class="navbar">
         <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
         <button class="increase-btn" onclick="increasePoints()">Increase Points</button>
-        <button class="move-up-btn" onclick="moveUp()">Move Up</button>
         <div class="logo">EcoPulse</div>
     </div>
 
     <div class="container">
         <div class="sidebar">
             <h2>Leaderboard</h2>
-            <div class="leaderboard-item"><span>1. EcoWarrior</span> <span>1250 pts</span></div>
-            <div class="leaderboard-item"><span>2. GreenGuru</span> <span>1100 pts</span></div>
-            <div class="leaderboard-item"><span>3. EarthDefender</span> <span>950 pts</span></div>
-            <div class="leaderboard-item"><span>4. ClimateChamp</span> <span>800 pts</span></div>
-            <div class="leaderboard-item highlight" id="user-box"><span>5. SustainableSoul</span> <span>{{ points }} pts</span></div>
+            <div id="leaderboard">
+                {% for user in top_9 %}
+                    <div class="leaderboard-item {% if user._id|string == session['user_id'] %}highlight{% endif %}" id="rank-{{ loop.index }}">
+                        <span>{{ loop.index + 1 }}. {{ user.name }}</span>
+                        <span>{{ user.points }} pts</span>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
 
         <div class="main">
@@ -352,7 +301,7 @@
         </div>
 
         <div class="schedule">
-            <h2>Today's EcoTasks</h2>
+            <h2>Today's Schedule</h2>
             <div class="calendar" id="calendar">
                 {% for hour in range(24) %}
                     {% if meal_times.breakfast.hour == hour %}
@@ -399,6 +348,7 @@
                 if (data.points) {
                     document.getElementById('eco-points').textContent = `Your Eco Points: ${data.points}`;
                     document.querySelector('#user-box span:last-child').textContent = `${data.points} pts`;
+                    refreshLeaderboard();
                 }
             })
             .catch(error => console.error('Error:', error));
@@ -407,32 +357,6 @@
         document.querySelector('.button').addEventListener('click', function() {
             alert('New EcoChallenge started! Let\'s make a difference!');
         });
-
-        let points = {{ points }};
-        const targetPoints = {{ points }};
-        const ecoPointsElement = document.getElementById('eco-points');
-
-        function animatePoints() {
-            if (points < targetPoints) {
-                points += 5;
-                ecoPointsElement.textContent = `Your Eco Points: ${points}`;
-                requestAnimationFrame(animatePoints);
-            }
-        }
-
-        animatePoints();
-
-        function moveUp() {
-            const userBox = document.getElementById('user-box');
-            const previousBox = userBox.previousElementSibling;
-
-            if (previousBox) {
-                userBox.classList.remove('highlight');
-                previousBox.classList.add('highlight');
-
-                userBox.parentNode.insertBefore(userBox, previousBox);
-            }
-        }
 
         function showDetails(title, details, hour, element) {
             const detailsBox = document.getElementById('details-box');
@@ -451,6 +375,37 @@
             detailsBox.style.display = 'none';
         }
 
+        function updateLeaderboard(data) {
+            const leaderboard = document.getElementById('leaderboard');
+            leaderboard.innerHTML = '';
+            data.top_9.forEach((user, index) => {
+                const item = document.createElement('div');
+                item.className = `leaderboard-item ${user.is_current_user ? 'highlight' : ''}`;
+                item.id = `rank-${index + 1}`;
+                item.innerHTML = `
+                    <span>${index + 1}. ${user.name}</span>
+                    <span>${user.points} pts</span>
+                `;
+                leaderboard.appendChild(item);
+            });
+            document.getElementById('user-rank').textContent = `Your Rank: ${data.user_rank}`;
+        }
+
+        function refreshLeaderboard() {
+            fetch('/get_leaderboard')
+                .then(response => response.json())
+                .then(data => {
+                    updateLeaderboard(data);
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        // Refresh leaderboard every 30 seconds
+        setInterval(refreshLeaderboard, 30000);
+
+        // Initial leaderboard refresh
+        refreshLeaderboard();
+
         document.addEventListener('DOMContentLoaded', () => {
             const currentHour = new Date().getHours();
             const currentItem = document.getElementById(`hour-${currentHour}`);
@@ -459,6 +414,43 @@
                 currentItem.scrollIntoView({behavior: "smooth", block: "center"});
             }
         });
+
+        function animateRankChange(oldRank, newRank) {
+            const leaderboard = document.getElementById('leaderboard');
+            const items = leaderboard.children;
+            
+            if (oldRank > newRank) {
+                for (let i = oldRank - 1; i >= newRank; i--) {
+                    items[i].classList.add('glow');
+                    setTimeout(() => {
+                        if (i > 0) {
+                            leaderboard.insertBefore(items[i], items[i-1]);
+                        }
+                        items[i].classList.remove('glow');
+                    }, (oldRank - i) * 500);
+                }
+            }
+        }
+
+        let lastKnownRank = {{ user_rank }};
+
+        function checkForRankChange(newRank) {
+            if (newRank !== lastKnownRank) {
+                animateRankChange(lastKnownRank, newRank);
+                lastKnownRank = newRank;
+            }
+        }
+
+        // Modify the refreshLeaderboard function to check for rank changes
+        function refreshLeaderboard() {
+            fetch('/get_leaderboard')
+                .then(response => response.json())
+                .then(data => {
+                    updateLeaderboard(data);
+                    checkForRankChange(data.user_rank);
+                })
+                .catch(error => console.error('Error:', error));
+        }
     </script>
 </body>
 </html>
