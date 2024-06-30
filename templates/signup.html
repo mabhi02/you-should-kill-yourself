@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoPulse Login/Signup</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Your existing CSS */
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="logo">EcoPulse</div>
+    </div>
+
+    <div class="container">
+        <div class="form-container" id="loginForm">
+            <h2>Login</h2>
+            <form method="POST" action="/login">
+                <div class="input-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" name="email" id="loginEmail" required>
+                </div>
+                <div class="input-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" name="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="button">Login</button>
+            </form>
+            <div class="switch-form">
+                Don't have an account? <a href="#" onclick="toggleForm()">Sign up</a>
+            </div>
+        </div>
+
+        <div class="form-container" id="signupForm" style="display: none;">
+            <h2>Sign Up</h2>
+            <form method="POST" action="/signup">
+                <div class="input-group">
+                    <label for="signupName">Name</label>
+                    <input type="text" name="name" id="signupName" required>
+                </div>
+                <div class="input-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" name="email" id="signupEmail" required>
+                </div>
+                <div class="input-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" name="password" id="signupPassword" required>
+                </div>
+                <button type="submit" class="button">Sign Up</button>
+            </form>
+            <div class="switch-form">
+                Already have an account? <a href="#" onclick="toggleForm()">Login</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleForm() {
+            const loginForm = document.getElementById('loginForm');
+            const signupForm = document.getElementById('signupForm');
+            
+            if (loginForm.style.display === 'none') {
+                loginForm.style.display = 'block';
+                signupForm.style.display = 'none';
+            } else {
+                loginForm.style.display = 'none';
+                signupForm.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+
+</html>

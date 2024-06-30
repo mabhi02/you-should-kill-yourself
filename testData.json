@@ -1,0 +1,199 @@
+[
+  {
+    "_id": {"$oid": "6680bbfcef52e8e3f55650ec"},
+    "name": "AVM",
+    "email": "avm@avm.com",
+    "password": {"$binary": {"base64": "JDJiJDEyJFQ1WGpEZ2VsMG5YcFVQR29aVlpQWk9xZjBRTTYyM0Z1YklpRkI4MlVZWnJ1ampHeDNGS0Zp", "subType": "00"}},
+    "points": 5
+  },
+  {
+    "_id": {"$oid": "6680be036f6ff78bea397baf"},
+    "name": "rizz",
+    "email": "rizz@rizz.com",
+    "password": {"$binary": {"base64": "JDJiJDEyJDU5TTNvSlBNcjMxZkEzd1IzZ2xJSi45cC5VNlg0dnZRNVh0LzRoeE1rVkQvQnNFc2l2bWhh", "subType": "00"}},
+    "points": 0
+  },
+  {
+    "_id": {"$oid": "6680bf705d70dd055fe5b09b"},
+    "name": "goat",
+    "email": "goat@goat.com",
+    "password": {"$binary": {"base64": "JDJiJDEyJC5TWk5keGtnMTB3UHhEMlI4VEFnY09oS0dBMXREbDBEU09sbER2aWprNlJqOE1STVNJd3dt", "subType": "00"}},
+    "points": 59
+  },
+  {
+    "_id": {"$oid": "6680fcb192da9f1aea0b4d1b"},
+    "name": "Chad",
+    "email": "chad@chad.com",
+    "password": {"$binary": {"base64": "JDJiJDEyJHAyTU5wanZsaVhSQ1hSWHNSb2tmY2VTVDdmLm8yMWRHTUx4TnJQNGtVNzhXRXVSNjEwMFRh", "subType": "00"}},
+    "points": 0,
+    "created_at": {"$date": "2024-06-29T23:35:29.279Z"}
+  },
+  {
+    "_id": {"$oid": "6680fce192da9f1aea0b4d1c"},
+    "name": "Aylin",
+    "email": "aylin@aylin.com",
+    "password": {"$binary": {"base64": "JDJiJDEyJElHVnU4c2hCNzNLc0dsUjZyNmpWYmVCYUMxbkdhcVh4VWU0d1U4a0tmdkVwTmVtRDJ4Mk9t", "subType": "00"}},
+    "points": 0,
+    "created_at": {"$date": "2024-06-29T23:36:17.104Z"}
+  },
+  {
+    "_id": {"$oid": "6680ff00f123456789abcdef"},
+    "name": "User1",
+    "email": "user1@example.com",
+    "password": {"$binary": {"base64": "JDJiJDEyJGxJN09NbzRBb1VQTEFiTVR2elQ4U21sbE9UQlFpM2h2UVhlN09ZdExEU0Q4cVdxdFRyNzhu", "subType": "00"}},
+    "points": 10,
+    "created_at": {"$date": "2024-06-29T23:40:00.000Z"}
+  },
+  {
+    "_id": {"$oid": "6680ff01f123456789abcdef"},
+    "name": "User2",
+    "email": "user2@example.com",
+    "password": {"$binary": {"base64": "JDJiJDEyJEdGU2d2bm9WWnpLM0N5Z2x1UThHRWhQeHdESnU4Zmh0MXZFVVR2RHZ1c1hrVkF5RmFoM2V1", "subType": "00"}},
+    "points": 20,
+    "created_at": {"$date": "2024-06-29T23:41:00.000Z"}
+  },
+  {
+    "_id": {"$oid": "6680ff02f123456789abcdef"},
+    "name": "User3",
+    "email": "user3@example.com",
+    "password": {"$binary": {"base64": "JDJiJDEyJGVXbW1EUVBKM1l1aE1QeFhRZTJHQlU5RGpOZ2lVc3Z2VzJtT3dMQXJ2L1JUbmxsWE9POTc2", "subType": "00"}},
+    "points": 0,
+    "created_at": {"$date": "2024-06-29T23:42:00.000Z"}
+  },
+  {
+    "_id": {"$oid": "6680ff03f123456789abcdef"},
+    "name": "User4",
+    "email": "user4@example.com",
+    "password": {"$binary": {"base64": "JDJiJDEyJG5IU3ZjRFh0ekI4Q1lObXkyT1J1ZGJpRVhRbHhFb3hNUjRFZm9sa2t4U1dGcmQzRGlFY0dF", "subType": "00"}},
+    "points": 15,
+    "created_at": {"$date": "2024-06-29T23:43:00.000Z"}
+  },
+  {
+    "_id": {"$oid": "6680ff04f123456789abcdef"},
+    "name": "User5",
+    "email": "user5@example.com",
+    "password": {"$binary": {"base64": "JDJiJDEyJDJNS3RhMktVQnhiYm5DNGdBbUNncnZsVnI5Yk9IbmZ1cHZodW5qL29hRWliVVFsN3lyZXZr", "subType": "00"}},
+    "points": 25,
+    "created_at": {"$date": "2024-06-29T23:44:00.000Z"}
+  },
+  {
+    "_id": {"$oid": "6680ff05f123456789abcdef"},
+    "name": "User6",
+    "email": "user6@example.com",
+    "password": {"$binary": {"base64": "JDJiJDEyJHJKc2hKZ1JIVDlEUTd0bFlUOE5CcXhUVGZBckV2UlhvNFFkQ1VGRHpaNGRFVmJUbWg3WjBB", "subType": "00"}},
+    "points": 0,
+    "created_at": {"$date": "2024-06-29T23:45:00.000Z"}
+  },
+  {
+    "_id": {"$oid": "6680ff06f123456789abcdef"},
+    "name": "User7",
+    "email": "user7@example.com",
+    "password": {"$binary": {"base64": "JDJiJDEyJHR5VnVzdHh1TktMeHk4OGJaQ1ZvYkZXV1h4TFdoM2FpY2JLUjY5TFVQVE15T2M1RGpLRkpB", "subType": "00"}},
+    "points": 5,
+    "created_at": {"$date": "2024-06-29T23:46:00.000Z"}
+  },
+  {
+    "_id": {"$oid": "6680ff07f123456789abcdef"},
+    "name": "User8",
+    "email": "user8@example.com",
+    "password": {"$binary": {"base64": "JDJiJDEyJHRubHVSbmhVM2swOGQ2VUtjV2VwM0FOMVlvUzNabkhMOGhObEFSdHFlcHJ3RlpueTBHd1Zk", "subType": "00"}},
+    "points": 35,
+    "created_at": {"$date": "2024-06-29T23:47:00.000Z"}
+  },
+  {
+    "_id": {"$oid": "6680ff08f123456789abcdef"},
+    "name": "User9",
+    "email": "user9@example.com",
+    "password": {"$binary": {"base64": "JDJiJDEyJE5qSGhNeVp6NVoyTXM2VGJLa1FDaThwMnRQTnN2c2t5cW5DbzhndXBRT29EOTBsMFJvTG5a", "subType": "00"}},
+    "points": 45,
+    "created_at": {"$date": "2024-06-29T23:48:00.000Z"}
+  },
+  {
+    "_id": {"$oid": "6680ff09f123456789abcdef"},
+    "name": "User10",
+    "email": "user10@example.com",
+    "password": {"$binary": {"base64": "JDJiJDEyJHNjcUxzcFdhbnNTeW5KQ3dETVdCS1BNM2dwV05kMFBNR1B6SVJSMkU4Tk5pWTRnTmdyRkU2", "subType": "00"}},
+    "points": 55,
+    "created_at": {"$date": "2024-06-29T23:49:00.000Z"}
+  },
+  {
+    "_id": {"$oid": "6680ff0af123456789abcdef"},
+    "name": "User11",
+    "email": "user11@example.com",
+    "password": {"$binary": {"base64": "JDJiJDEyJEZJZ3RlNXBFZ1Bvc1NFV0VsSW9HbFp3cnNQTXd4SHQ0eVNCQ3NnQnRpSk9EMmdQRkREdVRO", "subType": "00"}},
+    "points": 60,
+    "created_at": {"$date": "2024-06-29T23:50:00.000Z"}
+  },
+  {
+    "_id": {"$oid": "6680ff0bf123456789abcdef"},
+    "name": "User12",
+    "email": "user12@example.com",
+    "password": {"$binary": {"base64": "JDJiJDEyJEFSbk5sMmpVcUVmVkdUQVRHRHpka0VnM0pqeGVSMWlYN2xvZWFDL0lwblFzL05nMFlCS2sw", "subType": "00"}},
+    "points": 50,
+    "created_at": {"$date": "2024-06-29T23:51:00.000Z"}
+  },
+  {
+    "_id": {"$oid": "6680ff0cf123456789abcdef"},
+    "name": "User13",
+    "email": "user13@example.com",
+    "password": {"$binary": {"base64": "JDJiJDEyJFN5TjB1dUV2U3pWblRqa1MxR2tUbzFFVGpKOHFjcGFuR0t1MUFaWUpmVWRoN0o4T0VVRExU", "subType": "00"}},
+    "points": 30,
+    "created_at": {"$date": "2024-06-29T23:52:00.000Z"}
+  },
+  {
+    "_id": {"$oid": "6680ff0df123456789abcdef"},
+    "name": "User14",
+    "email": "user14@example.com",
+    "password": {"$binary": {"base64": "JDJiJDEyJHhrU2FuM1Q3MXBlVkhDU29NOG1uWkJLT3lhQ05SSGVpTWVhV0x2OHNoWmF5d1hhd1g1bGhG", "subType": "00"}},
+    "points": 40,
+    "created_at": {"$date": "2024-06-29T23:53:00.000Z"}
+  },
+  {
+    "_id": {"$oid": "6680ff0ef123456789abcdef"},
+    "name": "User15",
+    "email": "user15@example.com",
+    "password": {"$binary": {"base64": "JDJiJDEyJHZhV29yS2Z3M0t6ZnVPaTlOT2tOVk96Z1Y1eVZpRFV1V09LRGJqRmdmMFUwWkZJNzFPNDlw", "subType": "00"}},
+    "points": 20,
+    "created_at": {"$date": "2024-06-29T23:54:00.000Z"}
+  },
+  {
+    "_id": {"$oid": "6680ff0ff123456789abcdef"},
+    "name": "User16",
+    "email": "user16@example.com",
+    "password": {"$binary": {"base64": "JDJiJDEyJHpOc1JSVmZ3NVpUbFJncUxqT0tHRU9XT2FWR1BtUzdqRUZpMm5kNVUzMHRuN2NHVmJjNEJ1", "subType": "00"}},
+    "points": 10,
+    "created_at": {"$date": "2024-06-29T23:55:00.000Z"}
+  },
+  {
+    "_id": {"$oid": "6680ff10f123456789abcdef"},
+    "name": "User17",
+    "email": "user17@example.com",
+    "password": {"$binary": {"base64": "JDJiJDEyJE5vTTFYN2J1L0V3U2J1VFpGS1R0MkU1NUNpdkdMTm5wNlNqczJNd05aTFJhZWhIZkUwbkE5", "subType": "00"}},
+    "points": 0,
+    "created_at": {"$date": "2024-06-29T23:56:00.000Z"}
+  },
+  {
+    "_id": {"$oid": "6680ff11f123456789abcdef"},
+    "name": "User18",
+    "email": "user18@example.com",
+    "password": {"$binary": {"base64": "JDJiJDEyJG1ac0xIQ3RIT3d4N1Z1L3Q1aTFUVnhFQ1dBcFdVZktlTnQ2ZnBxalAxVUtubEdwbUhuSGtO", "subType": "00"}},
+    "points": 10,
+    "created_at": {"$date": "2024-06-29T23:57:00.000Z"}
+  },
+  {
+    "_id": {"$oid": "6680ff12f123456789abcdef"},
+    "name": "User19",
+    "email": "user19@example.com",
+    "password": {"$binary": {"base64": "JDJiJDEyJHV4eXdLTFFQSzREa3Y0cVp3ZGhPQTFLWlFkUG44eGpDOVUyZ1V2b0hHR2gybm1GdTRTRHlY", "subType": "00"}},
+    "points": 5,
+    "created_at": {"$date": "2024-06-29T23:58:00.000Z"}
+  },
+  {
+    "_id": {"$oid": "6680ff13f123456789abcdef"},
+    "name": "User20",
+    "email": "user20@example.com",
+    "password": {"$binary": {"base64": "JDJiJDEyJGxMYzFPYXdTZ2lTa0EyNlRkTmtIVmMyY2ZBZmd0RG9GRjM4NVB6bEV0dlBpWFltQUZ4dTVv", "subType": "00"}},
+    "points": 15,
+    "created_at": {"$date": "2024-06-29T23:59:00.000Z"}
+  }
+]

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoPulse Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;700&display=swap');
+        
+        body {
+            background-color: #010813;
+            font-family: 'Montserrat', sans-serif;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            flex-grow: 1;
+            justify-content: space-between;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        .sidebar, .schedule {
+            background-color: #112240;
+            padding: 20px;
+            border-radius: 10px;
+            width: 20%;
+            box-shadow: 0 4px 12px rgba(0, 255, 0, 0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar:hover, .schedule:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0, 255, 0, 0.2);
+        }
+
+        .main {
+            background-color: #112240;
+            padding: 20px;
+            border-radius: 10px;
+            width: 55%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 255, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .main:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0, 255, 0, 0.2);
+        }
+
+        .navbar {
+            background-image: url('https://www.publicdomainpictures.net/pictures/30000/nahled/green-leaves-background-1331908165FvP.jpg');
+            background-size: cover;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .navbar .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #64ffda;
+            text-shadow: 0 0 10px rgba(100, 255, 218, 0.5);
+        }
+
+        .button {
+            background-color: #64ffda;
+            border: none;
+            color: #0a192f;
+            padding: 12px 24px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 20px 0;
+            cursor: pointer;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(100, 255, 218, 0.2);
+        }
+
+        .button:hover {
+            background-color: #0a192f;
+            color: #64ffda;
+            box-shadow: 0 6px 8px rgba(100, 255, 218, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .leaderboard-item {
+            background-color: #1d3557;
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+            flex-grow: 1;
+        }
+
+        .leaderboard-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(100, 255, 218, 0.2);
+        }
+
+        .leaderboard-item.highlight {
+            background-color: #64ffda;
+            color: #0a192f;
+        }
+
+        .leaderboard h2, .schedule h2, .main h1 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #64ffda;
+        }
+
+        .main h1 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(100, 255, 218, 0.5);
+        }
+
+        .schedule-item {
+            background-color: #1d3557;
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .schedule-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 8px rgba(100, 255, 218, 0.2);
+        }
+
+        .meal-time {
+            background-color: #2a9d8f;
+            color: #fff;
+        }
+
+        .meal-time:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 8px rgba(42, 157, 143, 0.2);
+        }
+
+        .event-time {
+            background-color: #e76f51;
+            color: #fff;
+        }
+
+        .event-time:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 8px rgba(231, 111, 81, 0.2);
+        }
+
+        .schedule-item i {
+            margin-right: 10px;
+            color: #64ffda;
+        }
+
+        #greeting {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #8892b0;
+        }
+
+        #eco-points {
+            font-size: 48px;
+            font-weight: bold;
+            color: #64ffda;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(100, 255, 218, 0.5);
+        }
+
+        .logout-btn, .increase-btn, .move-up-btn {
+            background-color: #64ffda;
+            color: #0a192f;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+
+        .logout-btn:hover, .increase-btn:hover, .move-up-btn:hover {
+            background-color: #0a192f;
+            color: #64ffda;
+        }
+
+        .highlight {
+            background-color: #64ffda;
+            color: #0a192f;
+            box-shadow: 0 4px 8px rgba(255, 255, 0, 0.2);
+        }
+
+        .glow {
+            animation: glow 1s infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 5px #64ffda, 0 0 10px #64ffda, 0 0 15px #64ffda, 0 0 20px #64ffda, 0 0 25px #64ffda;
+            }
+            to {
+                box-shadow: 0 0 10px #64ffda, 0 0 15px #64ffda, 0 0 20px #64ffda, 0 0 25px #64ffda, 0 0 30px #64ffda;
+            }
+        }
+
+        .calendar {
+            display: grid;
+            grid-template-rows: repeat(24, 1fr);
+            gap: 5px;
+            max-height: 560px; /* Adjust this height as needed */
+            overflow-x: hidden; /* Disable vertical scrolling */
+            scroll-behavior: smooth;
+        }
+
+        .calendar-item {
+            background-color: #1d3557;
+            padding: 10px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .calendar-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 8px rgba(100, 255, 218, 0.2);
+        }
+
+        .meal-item {
+            background-color: #2a9d8f;
+            padding: 10px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .meal-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 8px rgba(42, 157, 143, 0.2);
+        }
+
+        .event-item {
+            background-color: #e76f51;
+            padding: 10px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .event-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 8px rgba(231, 111, 81, 0.2);
+        }
+
+        .current-hour {
+            border: 2px solid #64ffda;
+        }
+
+        .details-box {
+            background-color: #112240;
+            color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border: 2px solid #e76f51;
+            display: none;
+            position: absolute;
+            z-index: 10;
+            max-width: 300px;
+            text-align: left;
+        }
+
+        .details-box .close-btn {
+            background-color: #64ffda;
+            color: #0a192f;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+            margin-top: 10px;
+        }
+
+        .details-box .close-btn:hover {
+            background-color: #0a192f;
+            color: #64ffda;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+        <button class="increase-btn" onclick="increasePoints()">Increase Points</button>
+        <button class="move-up-btn" onclick="moveUp()">Move Up</button>
+        <div style='padding-right:3%'; class="logo">EcoPulse</div>
+    </div>
+
+    <div class="container">
+        <div class="sidebar">
+            <h2>Leaderboard</h2>
+            <div id="leaderboard">
+                <!-- Leaderboard items will be populated here by JavaScript -->
+            </div>
+        </div>
+
+        <div class="main">
+            <h1>Welcome to EcoPulse</h1>
+            <div id="greeting">Hello, {{ name }}!</div>
+            <div id="eco-points">Your Eco Points: {{ points }}</div>
+            <div id="user-rank">Your Rank: {{ user_rank }}</div>
+            <button class="button">Start New EcoChallenge</button>
+        </div>
+
+        <div class="schedule">
+            <h2>Today's EcoTasks</h2>
+            <div class="calendar" id="calendar">
+                {% for hour in range(24) %}
+                    {% if meal_times.breakfast.hour == hour %}
+                        <div class="meal-item" id="hour-{{ hour }}" onclick="showDetails('Breakfast', '{{ meal_times.breakfast.food }}', '{{ hour }}', this)">
+                            {{ "{:02d}:00".format(hour) }} Breakfast
+                        </div>
+                    {% elif meal_times.lunch.hour == hour %}
+                        <div class="meal-item" id="hour-{{ hour }}" onclick="showDetails('Lunch', '{{ meal_times.lunch.food }}', '{{ hour }}', this)">
+                            {{ "{:02d}:00".format(hour) }} Lunch
+                        </div>
+                    {% elif meal_times.dinner.hour == hour %}
+                        <div class="meal-item" id="hour-{{ hour }}" onclick="showDetails('Dinner', '{{ meal_times.dinner.food }}', '{{ hour }}', this)">
+                            {{ "{:02d}:00".format(hour) }} Dinner
+                        </div>
+                    {% elif hour in events %}
+                        <div class="event-item" id="hour-{{ hour }}" onclick="showDetails('{{ events[hour]["summary"] }}', '{{ events[hour]["location"] }}<br>{{ events[hour]["description"] }}<br>{{ events[hour]["start"] }} - {{ events[hour]["end"] }}', '{{ hour }}', this)">
+                            {{ "{:02d}:00".format(hour) }} {{ events[hour]["summary"] }}
+                        </div>
+                    {% else %}
+                        <div class="calendar-item" id="hour-{{ hour }}">
+                            {{ "{:02d}:00".format(hour) }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div id="details-box" class="details-box">
+        <div id="details-content"></div>
+        <button class="close-btn" onclick="hideDetails()">Close</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
+    <script>
+        var socket = io();
+    
+        socket.on('connect', function() {
+            console.log('Connected to server');
+            socket.emit('update_leaderboard');
+        });
+    
+        socket.on('leaderboard_data', function(data) {
+            var leaderboard = document.getElementById('leaderboard');
+            leaderboard.innerHTML = '';
+            data.forEach(function(user, index) {
+                var div = document.createElement('div');
+                div.className = 'leaderboard-item' + (user.is_current_user ? ' highlight' : '');
+                div.innerHTML = `<span>${user.rank}. ${user.name}</span> <span>${user.points} pts</span>`;
+                leaderboard.appendChild(div);
+            });
+        });
+    
+        function increasePoints() {
+            fetch('/increase_points', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.points) {
+                    document.getElementById('eco-points').textContent = `Your Eco Points: ${data.points}`;
+                    document.querySelector('#user-box span:last-child').textContent = `${data.points} pts`;
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    
+        document.querySelector('.button').addEventListener('click', function() {
+            alert('New EcoChallenge started! Let\'s make a difference!');
+        });
+    
+        let points = {{ points }};
+        const targetPoints = {{ points }};
+        const ecoPointsElement = document.getElementById('eco-points');
+    
+        function animatePoints() {
+            if (points < targetPoints) {
+                points += 5;
+                ecoPointsElement.textContent = `Your Eco Points: ${points}`;
+                requestAnimationFrame(animatePoints);
+            }
+        }
+    
+        animatePoints();
+    
+        function moveUp() {
+            const userBox = document.getElementById('user-box');
+            const previousBox = userBox.previousElementSibling;
+    
+            if (previousBox) {
+                userBox.classList.remove('highlight');
+                previousBox.classList.add('highlight');
+    
+                userBox.parentNode.insertBefore(userBox, previousBox);
+            }
+        }
+    
+        function showDetails(title, details, hour, element) {
+            const detailsBox = document.getElementById('details-box');
+            const detailsContent = document.getElementById('details-content');
+    
+            detailsContent.innerHTML = `<strong>${title} at ${hour}:00</strong><br>${details}`;
+    
+            const rect = element.getBoundingClientRect();
+            detailsBox.style.top = `${rect.top - detailsBox.offsetHeight - 10}px`;
+            detailsBox.style.left = `${rect.left}px`;
+            detailsBox.style.display = 'block';
+        }
+    
+        function hideDetails() {
+            const detailsBox = document.getElementById('details-box');
+            detailsBox.style.display = 'none';
+        }
+    
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentHour = new Date().getHours();
+            const currentItem = document.getElementById(`hour-${currentHour}`);
+            if (currentItem) {
+                currentItem.classList.add("current-hour");
+                currentItem.scrollIntoView({behavior: "smooth", block: "center"});
+            }
+        });
+    </script>
+    
+
+    
+</body>
+</html>
