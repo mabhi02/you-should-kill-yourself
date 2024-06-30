@@ -65,13 +65,10 @@ if __name__ == "__main__":
 
 print(grocery_store_names)
 
-#"python eatIn.py APIKEY 37.7749,-122.4194"
-
-
 
 
 # Initialize OpenAI API key (replace 'your-api-key' with the actual API key)
-openai.api_key = "" 
+#openai.api_key = "" 
 
 # Sample fridge data GET FROM FORM as {Item, Quantity, Expiration_Date}
 fridge_data = [
