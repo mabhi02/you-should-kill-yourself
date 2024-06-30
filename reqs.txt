@@ -1,4 +1,11 @@
 openai==0.28
 numpy
 pandas
-sys
+argparse
+requests
+datetime
+scikit-learn
+pinecone
+pinecone-client
+PyPDF2
+tqdm

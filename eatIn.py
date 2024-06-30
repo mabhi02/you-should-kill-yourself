@@ -7,6 +7,7 @@ import numpy as np
 import sys
 import requests
 import argparse
+import time
 
 
 def get_grocery_stores(api_key, location, radius=16093):  # 16093 meters ~ 10 miles
@@ -36,13 +37,13 @@ def get_grocery_stores(api_key, location, radius=16093):  # 16093 meters ~ 10 mi
             break
         
         params["pagetoken"] = next_page_token
-        import time
         time.sleep(2)  # Wait for 2 seconds before making the next request
     
     return grocery_stores
 
 grocery_store_names = [] 
 ratings = []
+addresses = []
 
 def main():
     parser = argparse.ArgumentParser(description="Find grocery stores using Google Places API")
@@ -56,19 +57,22 @@ def main():
     for i, store in enumerate(grocery_stores, 1):
         name = store.get("name", "Unknown")
         rating = store.get("rating", "Not rated")
+        address = store.get("vicinity", "Address not available")
         grocery_store_names.append(name)
         ratings.append(rating)
-        print(f"{i}. {name} (Rating: {rating})")
+        addresses.append(address)
+        print(f"{i}. {name} (Rating: {rating}) - {address}")
 
 if __name__ == "__main__":
     main()
 
 print(grocery_store_names)
+call = "python eatIn.py AIzaSyDoCCNgmaUfYf526pxNbzALKswaThqMByc 37.7749,-122.4194"
 
 
 
 # Initialize OpenAI API key (replace 'your-api-key' with the actual API key)
-#openai.api_key = "" 
+openai.api_key = "sk-proj-GLxozGg6qxjAtiaF8wVhT3BlbkFJcBnO9U6FW9frcpQ8Wl0a" 
 
 # Sample fridge data GET FROM FORM as {Item, Quantity, Expiration_Date}
 fridge_data = [
@@ -123,3 +127,27 @@ meal_plan = create_meal_plan(fridge)
 # Print the meal plan
 print("Meal Plan for the Week:")
 print(meal_plan)
+
+
+expired = []
+
+for i in grocery_store_names:
+    if i == "Trader Joe's":
+        expired.append(3)
+    elif i == "Whole Foods Market":
+        expired.append(5)
+    else:
+        expired.append(7)
+
+d = {
+    "Grocery": grocery_store_names,
+    "Rating": ratings,
+    "Expiration": expired,
+    "Address": addresses
+}
+
+df = pd.DataFrame(d)
+
+print(df.iloc[0])
+
+ 
