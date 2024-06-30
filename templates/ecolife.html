@@ -122,11 +122,6 @@
             box-shadow: 0 4px 8px rgba(100, 255, 218, 0.2);
         }
 
-        .leaderboard-item.highlight {
-            background-color: #64ffda;
-            color: #0a192f;
-        }
-
         .leaderboard h2, .schedule h2, .main h1 {
             font-family: 'Roboto', sans-serif;
             font-size: 24px;
@@ -287,7 +282,16 @@
         }
 
         .current-hour {
-            border: 2px solid #64ffda;
+            animation: current-glow 1s infinite alternate;
+        }
+
+        @keyframes current-glow {
+            from {
+                box-shadow: 0 0 10px #64ffda, 0 0 20px #64ffda, 0 0 30px #64ffda, 0 0 40px #64ffda;
+            }
+            to {
+                box-shadow: 0 0 20px #64ffda, 0 0 30px #64ffda, 0 0 40px #64ffda, 0 0 50px #64ffda;
+            }
         }
 
         .details-box {
@@ -326,15 +330,17 @@
         <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
         <button class="increase-btn" onclick="increasePoints()">Increase Points</button>
         <button class="move-up-btn" onclick="moveUp()">Move Up</button>
-        <div style='padding-right:3%'; class="logo">EcoPulse</div>
+        <div class="logo">EcoPulse</div>
     </div>
 
     <div class="container">
         <div class="sidebar">
             <h2>Leaderboard</h2>
-            <div id="leaderboard">
-                <!-- Leaderboard items will be populated here by JavaScript -->
-            </div>
+            <div class="leaderboard-item"><span>1. EcoWarrior</span> <span>1250 pts</span></div>
+            <div class="leaderboard-item"><span>2. GreenGuru</span> <span>1100 pts</span></div>
+            <div class="leaderboard-item"><span>3. EarthDefender</span> <span>950 pts</span></div>
+            <div class="leaderboard-item"><span>4. ClimateChamp</span> <span>800 pts</span></div>
+            <div class="leaderboard-item highlight" id="user-box"><span>5. SustainableSoul</span> <span>{{ points }} pts</span></div>
         </div>
 
         <div class="main">
@@ -362,8 +368,8 @@
                             {{ "{:02d}:00".format(hour) }} Dinner
                         </div>
                     {% elif hour in events %}
-                        <div class="event-item" id="hour-{{ hour }}" onclick="showDetails('{{ events[hour]["summary"] }}', '{{ events[hour]["location"] }}<br>{{ events[hour]["description"] }}<br>{{ events[hour]["start"] }} - {{ events[hour]["end"] }}', '{{ hour }}', this)">
-                            {{ "{:02d}:00".format(hour) }} {{ events[hour]["summary"] }}
+                        <div class="event-item" id="hour-{{ hour }}" onclick="showDetails('{{ events[hour] }}', '', '{{ hour }}', this)">
+                            {{ "{:02d}:00".format(hour) }} {{ events[hour] }}
                         </div>
                     {% else %}
                         <div class="calendar-item" id="hour-{{ hour }}">
@@ -380,27 +386,7 @@
         <button class="close-btn" onclick="hideDetails()">Close</button>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
     <script>
-        var socket = io();
-    
-        socket.on('connect', function() {
-            console.log('Connected to server');
-            socket.emit('update_leaderboard');
-        });
-    
-        socket.on('leaderboard_data', function(data) {
-            var leaderboard = document.getElementById('leaderboard');
-            leaderboard.innerHTML = '';
-            data.forEach(function(user, index) {
-                var div = document.createElement('div');
-                div.className = 'leaderboard-item' + (user.is_current_user ? ' highlight' : '');
-                div.innerHTML = `<span>${user.rank}. ${user.name}</span> <span>${user.points} pts</span>`;
-                leaderboard.appendChild(div);
-            });
-        });
-    
         function increasePoints() {
             fetch('/increase_points', {
                 method: 'POST',
@@ -417,15 +403,15 @@
             })
             .catch(error => console.error('Error:', error));
         }
-    
+
         document.querySelector('.button').addEventListener('click', function() {
             alert('New EcoChallenge started! Let\'s make a difference!');
         });
-    
+
         let points = {{ points }};
         const targetPoints = {{ points }};
         const ecoPointsElement = document.getElementById('eco-points');
-    
+
         function animatePoints() {
             if (points < targetPoints) {
                 points += 5;
@@ -433,38 +419,38 @@
                 requestAnimationFrame(animatePoints);
             }
         }
-    
+
         animatePoints();
-    
+
         function moveUp() {
             const userBox = document.getElementById('user-box');
             const previousBox = userBox.previousElementSibling;
-    
+
             if (previousBox) {
                 userBox.classList.remove('highlight');
                 previousBox.classList.add('highlight');
-    
+
                 userBox.parentNode.insertBefore(userBox, previousBox);
             }
         }
-    
+
         function showDetails(title, details, hour, element) {
             const detailsBox = document.getElementById('details-box');
             const detailsContent = document.getElementById('details-content');
-    
+
             detailsContent.innerHTML = `<strong>${title} at ${hour}:00</strong><br>${details}`;
-    
+
             const rect = element.getBoundingClientRect();
             detailsBox.style.top = `${rect.top - detailsBox.offsetHeight - 10}px`;
             detailsBox.style.left = `${rect.left}px`;
             detailsBox.style.display = 'block';
         }
-    
+
         function hideDetails() {
             const detailsBox = document.getElementById('details-box');
             detailsBox.style.display = 'none';
         }
-    
+
         document.addEventListener('DOMContentLoaded', () => {
             const currentHour = new Date().getHours();
             const currentItem = document.getElementById(`hour-${currentHour}`);
@@ -474,8 +460,5 @@
             }
         });
     </script>
-    
-
-    
 </body>
 </html>
